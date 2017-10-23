@@ -1,4 +1,4 @@
-var Task = /** @class */ (function () {
+var Task = (function () {
     function Task(description, priority) {
         this.description = description;
         this.priority = priority;
@@ -18,3 +18,4 @@ for (var _i = 0, tasks_1 = tasks; _i < tasks_1.length; _i++) {
     var task = tasks_1[_i];
     console.log(task);
 }
+//# sourceMappingURL=to-do.js.map
