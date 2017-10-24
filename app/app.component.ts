@@ -7,10 +7,10 @@ import { Component } from '@angular/core';
       <h1>StarCraft Builds {{month}}/{{day}}/{{year}}</h1>
       <h3>{{currentFocus}}</h3>
       <ul>
-       <li [class]="priorityColor(currentBuild)" *ngFor="let currentBuild of builds">{{currentBuild.title}} <button (click)="editTask()">Edit!</button></li>
+       <li [class]="priorityColor(currentBuild)" *ngFor="let currentBuild of builds">{{currentBuild.title}} <button (click)="editBuild(currentBuild)">Edit!</button></li>
      </ul>
      <hr>
-      <div>
+      <div *ngIf="selectedBuild">
         <h3>{{selectedBuild.title}}</h3>
         <h3>Edit Build</h3>
         <label>Enter New Build Title:</label>
@@ -20,6 +20,7 @@ import { Component } from '@angular/core';
         <input type="radio" [(ngModel)]="selectedBuild.priority" [value]="1">1 (Low Priority)<br>
         <input type="radio" [(ngModel)]="selectedBuild.priority" [value]="2">2 (Medium Priority)<br>
         <input type="radio" [(ngModel)]="selectedBuild.priority" [value]="3">3 (High Priority)
+        <button (click)="finishedEditing()">Done</button> <!--this is calling57  -->
      </div>
   </div>
   `
@@ -36,7 +37,7 @@ export class AppComponent {
     new Build ('Keegan Soup', ['starcraft', 'carriers', 'stalkers'], ['1. starport', '2. get carriers fast', '3. Keegan wins'], 2),
     new Build ('Andy Special', ['marines', 'medivacs', 'marauders'], ['1. Expands', '2. Tells Keegan to get upgrades', '3. We good guys'], 3)
   ];
-  selectedBuild: Build = this.builds[0];
+  selectedBuild = null;
 
   //function that connects public priority with it's class priorityColor
   priorityColor(currentBuild){
@@ -48,6 +49,14 @@ export class AppComponent {
      return "bg-info";
    }
  }
+
+ editBuild(clickedBuild) {
+    this.selectedBuild = clickedBuild;
+  }
+
+  finishedEditing() {
+    this.selectedBuild = null;
+  }
 
 }
 
